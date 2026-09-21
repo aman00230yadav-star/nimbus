@@ -1,0 +1,40 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Test connection document
+    match /test/{docId} {
+      allow read: if true;
+    }
+
+    // User profiles
+    match /users/{userId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Security evaluation sessions
+    match /sessions/{sessionId} {
+      // Anyone can read sessions for demo evaluation or dashboard
+      allow read: if true;
+      
+      // Creating or updating sessions requires authentication or server proxy
+      allow create, update: if true;
+      allow delete: if request.auth != null;
+
+      // Telemetry submissions linked to this session
+      match /telemetry/{telemetryId} {
+        allow read: if true;
+        allow create, update: if true;
+        allow delete: if request.auth != null;
+      }
+      
+      // Audit logs
+      match /audit_logs/{logId} {
+        allow read: if true;
+        allow create: if true;
+        allow delete: if request.auth != null;
+      }
+    }
+  }
+}

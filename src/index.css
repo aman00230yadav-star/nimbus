@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #F8F7F4;
+  --ink: #111113;
+  --accent: #E63946;
+  --card-bg: #FFFFFF;
+  --surface-alt: #EFECE6;
+  --border-ink: #111113;
+}
+
+::selection {
+  background: #E63946;
+  color: #F8F7F4;
+}
+
+@layer base {
+  body {
+    font-family: 'Space Mono', monospace;
+    background-color: #F8F7F4;
+    color: #111113;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, .font-syne {
+    font-family: 'Syne', sans-serif;
+  }
+}
+
+/* Custom editorial brutalist utilities */
+.font-syne {
+  font-family: 'Syne', sans-serif;
+}
+
+.font-mono {
+  font-family: 'Space Mono', monospace;
+}
+
+.card-brutalist {
+  border: 2px solid #111113;
+  background-color: transparent;
+  transition: all 0.15s ease-in-out;
+}
+
+.card-brutalist-solid {
+  border: 2px solid #111113;
+  background-color: #FFFFFF;
+}
+
+.btn-ink {
+  background: #111113;
+  color: #F8F7F4;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border: 2px solid #111113;
+  transition: all 0.15s ease;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+}
+
+.btn-ink:hover {
+  background: #E63946;
+  border-color: #E63946;
+  color: #F8F7F4;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #111113;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border: 2px solid #111113;
+  transition: all 0.15s ease;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+}
+
+.btn-outline:hover {
+  background: #111113;
+  color: #F8F7F4;
+}
+
+.label-spec {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.75;
+  margin-bottom: 0.5rem;
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+}
+
+/* Leaflet Tile Map Styling for Light Paper Aesthetic */
+.leaflet-container {
+  background-color: #EFECE6 !important;
+  font-family: 'Space Mono', monospace !important;
+}
+
+.leaflet-control-zoom a {
+  background-color: #F8F7F4 !important;
+  color: #111113 !important;
+  border: 2px solid #111113 !important;
+  font-weight: bold;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: #E63946 !important;
+  color: #F8F7F4 !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #FFFFFF !important;
+  color: #111113 !important;
+  border: 2px solid #111113 !important;
+  border-radius: 0px !important;
+  box-shadow: 4px 4px 0px #111113 !important;
+  font-family: 'Space Mono', monospace !important;
+}
+
+.leaflet-popup-tip {
+  background: #111113 !important;
+}

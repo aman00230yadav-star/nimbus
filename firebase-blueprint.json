@@ -1,0 +1,64 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with Google Auth identification and role metadata",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique Firebase Auth user ID" },
+        "email": { "type": "string", "description": "User email address" },
+        "displayName": { "type": "string", "description": "User display name" },
+        "photoURL": { "type": "string", "description": "User avatar URL" },
+        "createdAt": { "type": "string", "description": "Account registration timestamp" },
+        "role": { "type": "string", "enum": ["admin", "auditor", "analyst"], "description": "Access control role" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Session": {
+      "title": "Session",
+      "description": "Security awareness evaluation session configuration and state",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique session identifier" },
+        "session_name": { "type": "string", "description": "Human-readable session name" },
+        "template": { "type": "string", "description": "Template archetype used" },
+        "status": { "type": "string", "enum": ["active", "completed", "disabled"], "description": "Operational status" },
+        "collect_device": { "type": "boolean", "description": "Flag to record device telemetry" },
+        "collect_network": { "type": "boolean", "description": "Flag to record network routing" },
+        "request_location": { "type": "boolean", "description": "Flag to request GPS location" },
+        "creator_uid": { "type": "string", "description": "Owner user UID" },
+        "created_at": { "type": "string", "description": "ISO timestamp of creation" }
+      },
+      "required": ["id", "session_name", "status"]
+    },
+    "TelemetryBundle": {
+      "title": "TelemetryBundle",
+      "description": "Authorized participant telemetry records",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Telemetry record ID" },
+        "session_id": { "type": "string", "description": "Parent session ID" },
+        "consent_given": { "type": "boolean", "description": "Explicit participant consent flag" },
+        "device": { "type": "object", "description": "Hardware and browser parameters" },
+        "network": { "type": "object", "description": "IP and ASN routing telemetry" },
+        "location": { "type": "object", "description": "GPS coordinates and accuracy" },
+        "timestamp": { "type": "string", "description": "Transmission timestamp" }
+      },
+      "required": ["session_id", "consent_given"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Authenticated user profile documents"
+    },
+    "/sessions/{sessionId}": {
+      "schema": "Session",
+      "description": "Security awareness sessions created by users"
+    },
+    "/sessions/{sessionId}/telemetry/{telemetryId}": {
+      "schema": "TelemetryBundle",
+      "description": "Participant telemetry collections submitted during testing"
+    }
+  }
+}
